@@ -47,7 +47,7 @@ resource "aws_acm_certificate_validation" "validation" {
     [
       for record in aws_route53_record.public : record.fqdn
     ]]
-  )
+  )]
 }
 
 resource "aws_lb_listener" "public" {
