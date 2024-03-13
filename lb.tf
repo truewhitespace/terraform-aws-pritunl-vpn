@@ -24,6 +24,32 @@ resource "aws_lb_target_group" "public" {
   }
 }
 
+resource "aws_acm_certificate" "cert" {
+  domain_name       = aws_lb.public.domain_name
+  validation_method = "DNS"
+
+  tags = {
+    Environment = "all"
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
+}
+
+resource "aws_acm_certificate_validation" "validation" {
+  certificate_arn         = aws_acm_certificate.cert.arn
+  validation_record_fqdns = concat(
+    [
+      for record in aws_route53_record.record : record.fqdn
+    ],
+    [
+      for record in aws_route53_record.record : record.fqdn
+    ]
+  )
+}
+
 resource "aws_lb_listener" "public" {
   count             = length(local.public_rule)
   load_balancer_arn = aws_lb.public.arn
