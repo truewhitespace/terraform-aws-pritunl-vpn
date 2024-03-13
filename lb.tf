@@ -25,14 +25,14 @@ resource "aws_lb_target_group" "public" {
 }
 
 resource "aws_acm_certificate" "cert" {
-  domain_name       = aws_route53_record.public.name
+  domain_name       = format("%s.%s", var.public_lb_vpn_domain, var.route53_zone_name)
   validation_method = "DNS"
 
   tags = {
     Environment = "all"
   }
 
-  subject_alternative_names = [aws_route53_record.private.name]
+  subject_alternative_names = [format("%s.%s", var.public_lb_vpn_domain, var.route53_zone_name)]
 
   lifecycle {
     create_before_destroy = true
