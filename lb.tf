@@ -40,7 +40,14 @@ resource "aws_acm_certificate" "cert" {
 
 resource "aws_acm_certificate_validation" "validation" {
   certificate_arn         = aws_acm_certificate.cert.arn
-  validation_record_fqdns = [format("%s.%s", var.public_lb_vpn_domain, var.route53_zone_name)]
+  validation_record_fqdns = [concat(
+    [
+      for record in aws_route53_record.public : record.fqdn
+    ],
+    [
+      for record in aws_route53_record.public : record.fqdn
+    ]]
+  )
 }
 
 resource "aws_lb_listener" "public" {
