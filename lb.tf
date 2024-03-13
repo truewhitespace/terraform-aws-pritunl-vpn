@@ -32,7 +32,7 @@ resource "aws_acm_certificate" "cert" {
     Environment = "all"
   }
 
-  subject_alternative_names = [ws_route53_record.private.dns_name]
+  subject_alternative_names = [aws_route53_record.private.dns_name]
 
   lifecycle {
     create_before_destroy = true
