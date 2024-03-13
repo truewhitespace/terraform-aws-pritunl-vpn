@@ -25,7 +25,7 @@ resource "aws_lb_target_group" "public" {
 }
 
 resource "aws_acm_certificate" "cert" {
-  domain_name       = aws_lb.public.domain_name
+  domain_name       = format("%s.%s", var.public_lb_vpn_domain, var.route53_zone_name)
   validation_method = "DNS"
 
   tags = {
