@@ -43,11 +43,7 @@ resource "aws_acm_certificate_validation" "validation" {
   validation_record_fqdns = [concat(
     [
       for record in aws_route53_record.public : record.fqdn
-    ],
-    [
-      for record in aws_route53_record.public : record.fqdn
     ]]
-  )]
 }
 
 resource "aws_lb_listener" "public" {
