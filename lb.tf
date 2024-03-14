@@ -32,7 +32,7 @@ resource "aws_acm_certificate" "cert" {
     Environment = "all"
   }
 
-  subject_alternative_names = [format("%s.%s", var.public_lb_vpn_domain, var.route53_zone_name)]
+  # subject_alternative_names = [format("%s.%s", var.public_lb_vpn_domain, var.route53_zone_name)]
 
   lifecycle {
     create_before_destroy = true
