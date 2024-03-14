@@ -51,7 +51,6 @@ resource "aws_lb_listener" "public" {
   port              = local.public_rule[count.index].port
   protocol          = local.public_rule[count.index].protocol
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = data.aws_acm_certificate.tossl.arn
 
   default_action {
     type             = "forward"
