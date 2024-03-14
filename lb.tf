@@ -50,6 +50,7 @@ resource "aws_lb_listener" "public" {
   load_balancer_arn = aws_lb.public.arn
   port              = local.public_rule[count.index].port
   protocol          = local.public_rule[count.index].protocol
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
 
   default_action {
     type             = "forward"

@@ -12,7 +12,7 @@ locals {
 
   console_rule = [{
     port                  = 443,
-    protocol              = "TCP"
+    protocol              = "HTTPS"
     health_check_protocol = "TCP"
   }]
   public_rule              = concat(var.public_rule, var.is_enabled_https_public ? local.console_rule : [])
