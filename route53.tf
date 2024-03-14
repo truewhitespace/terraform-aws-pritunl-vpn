@@ -21,7 +21,7 @@ resource "aws_route53_record" "public" {
   allow_overwrite = true
   name            = each.value.name
   records         = [each.value.record]
-  ttl             = 60
+  # ttl             = 60
   type            = each.value.type
 
   alias {
