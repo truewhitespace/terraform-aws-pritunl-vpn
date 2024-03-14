@@ -4,7 +4,7 @@ data "aws_route53_zone" "this" {
 }
 
 resource "aws_route53_record" "public" {
-  # count   = var.is_create_route53_reccord ? 1 : 0
+  count   = var.is_create_route53_reccord ? 1 : 0
 
   # for_each = {
   #   for dvo in aws_acm_certificate.cert.domain_validation_options : dvo.domain_name => {
@@ -54,11 +54,11 @@ resource "aws_route53_record" "validation" {
   # ttl             = 60
   type = each.value.type
 
-  alias {
-    name                   = aws_lb.public.dns_name
-    zone_id                = aws_lb.public.zone_id
-    evaluate_target_health = true
-  }
+  # alias {
+  #   name                   = aws_lb.public.dns_name
+  #   zone_id                = aws_lb.public.zone_id
+  #   evaluate_target_health = true
+  # }
 
 
 }
